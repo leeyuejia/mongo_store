@@ -30,11 +30,11 @@ module.exports = {
     }
 };
 */
+require('dotenv').config()
 const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.MONGODB_URL
 const client = new MongoClient(uri, { useNewUrlParser: true });
 const DB_NAME = 'GA'
-const assert = require('assert')
 
 module.exports = {
     async connect() {
