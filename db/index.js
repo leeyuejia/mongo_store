@@ -11,7 +11,7 @@ const rawData = () => {
 }
 rawData()
 */
-
+/*
 const MongoClient = require('mongodb').MongoClient;
 const MONGO_URL = 'mongodb://localhost:27017'
 const assert = require('assert')
@@ -29,7 +29,23 @@ module.exports = {
         return client.close();
     }
 };
+*/
+const MongoClient = require('mongodb').MongoClient;
+const uri = process.env.MONGODB_URL
+const client = new MongoClient(uri, { useNewUrlParser: true });
+const DB_NAME = 'GA'
+const assert = require('assert')
 
+module.exports = {
+    async connect() {
+        const connection = await client.connect();
+        console.log('connected')
+        this.monsters = connection.db(DB_NAME).collection('monsters')
+    },
+    disconnect () {
+        return client.close();
+    }
+};
 
 
 
